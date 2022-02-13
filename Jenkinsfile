@@ -28,7 +28,7 @@ pipeline {
 
         stage ('Download Syft') {
             steps {
-                sh 'sudo curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin'
+                sh 'curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b .'
             }
         }
 
@@ -46,7 +46,7 @@ pipeline {
 
             steps {
 
-                sh 'syft .' // build & deploy artifacts
+                sh './syft .' // Scan with Syft
 
             }
 
