@@ -22,13 +22,14 @@ pipeline {
                 sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
+                    echo "${WORKSPACE}"
                 '''
             }
         }
 
         stage ('Download Syft') {
             steps {
-                sh 'curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b .'
+                sh 'mkdir -p ~/anchore-tools && cd ~/anchore-tools && curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b .'
             }
         }
 
@@ -36,7 +37,7 @@ pipeline {
 
             steps {
 
-                sh 'mvn clean install' // build & deploy artifacts
+                sh 'pwd && ls -la && cd ${WORKSPACE} && mvn clean install' // build & deploy artifacts
 
 
             }
