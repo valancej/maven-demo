@@ -28,7 +28,7 @@ pipeline {
 
         stage ('Download Syft') {
             steps {
-                sh 'apk add curl && curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin'
+                sh 'apt install curl && curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin'
             }
         }
 
