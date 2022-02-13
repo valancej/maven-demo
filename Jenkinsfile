@@ -26,12 +26,27 @@ pipeline {
             }
         }
 
+        stage ('Download Syft') {
+            steps {
+                sh 'curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin'
+            }
+        }
+
         stage ('Run Maven') {
 
             steps {
 
                 sh 'mvn clean install' // build & deploy artifacts
 
+
+            }
+
+        }
+        stage ('Scan built maven project with Syft') {
+
+            steps {
+
+                sh 'syft .' // build & deploy artifacts
 
             }
 
